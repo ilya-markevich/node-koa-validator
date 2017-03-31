@@ -3,9 +3,9 @@
 const context = {
   request: {
     body: {},
-    params: {},
     query: {}
-  }
+  },
+  params: {}
 };
 
 const validatorError = {

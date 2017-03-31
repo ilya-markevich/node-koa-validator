@@ -23,7 +23,7 @@ class KoaValidator {
   get paramsValidator() {
     const self = this;
 
-    return self._getSingleton('_paramsValidator', self.context.request.params);
+    return self._getSingleton('_paramsValidator', self.context.params);
   }
 
   get queryValidator() {

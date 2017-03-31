@@ -4,7 +4,7 @@ require('should');
 const sinon = require('sinon');
 
 const KoaValidator = require('../../src/koaValidator');
-const testData = require('./data/expressValidator');
+const testData = require('./data/koaValidator');
 
 describe('Koa Validator', () => {
   describe('Initial State', () => {
