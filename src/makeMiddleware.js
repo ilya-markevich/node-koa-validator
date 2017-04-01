@@ -7,6 +7,6 @@ module.exports = (customMethods) => {
     ctx.validator = new KoaValidator(ctx);
     KoaValidator.extend(customMethods);
 
-    next();
+    return next();
   };
 };
