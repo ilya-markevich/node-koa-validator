@@ -18,7 +18,7 @@ Validator for Koa framework.
 
 # Usage
 
-The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for ctx.request.body, ctx.params and ctx.request.query objects.
+The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for `ctx.request.body`, `ctx.params` and `ctx.request.query` objects.
 You can use each of the validators separately.
 
 The example of code:
@@ -40,7 +40,7 @@ app.use((ctx, next) => {
     const validator = ctx.validator;
     const { bodyValidator, paramsValidator, queryValidator } = validator;
 
-    console.log(validator.context); // you can get context object from validator
+    console.log(validator.context); // you can get context object from the ctx.validator
 
     bodyValidator.property('name').isNotEmpty().isTestString();
 
