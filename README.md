@@ -9,7 +9,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/ilya-markevich/node-koa-validator/badge.svg)](https://snyk.io/test/github/ilya-markevich/node-koa-validator)
 [![node](https://img.shields.io/node/v/koa-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/koa-dee-validator)
 
-Validator for Koa framework.
+[Dee-validator](https://github.com/ilya-markevich/node-validator) port for Koa framework.
 
 # Table of contents
 * [Usage](#usage)
