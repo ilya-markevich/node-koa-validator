@@ -18,14 +18,14 @@ Validator for Koa framework.
 
 # Usage
 
-The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for: body, query and params objects.
+The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for ctx.request.body, ctx.params and ctx.request.query objects.
 You can use each of the validators separately.
 
 The example of code:
 ```javascript
 
 const Koa = require('koa');
-const validator = require('express-dee-validator');
+const validator = require('koa-dee-validator');
 
 const app = new Koa();
 const customValidators = { // custom validators
@@ -46,9 +46,9 @@ app.use((ctx, next) => {
 
     paramsValidator.property('id').isNotEmpty();
 
-    if (validator.hasErrors()) {
+    if (validator.hasErrors()) { // return true in case if no errors in body, params and query validators
       return Promise.reject({
-        errors: validator.getErrors()
+        errors: validator.getErrors() // here you can get errors from all of the validators
       });
     } else {
       return next();
@@ -57,6 +57,22 @@ app.use((ctx, next) => {
 ```
 
 You can find more details about creation of custom validators and dee-validator usage [here](https://github.com/ilya-markevich/node-validator)
+
+Example of errors format:
+``` javascript
+{
+    'name': {
+        param: 'name',
+        message: 'name should be a string',
+        value: 0
+    },
+    'id': {
+        param: 'id',
+        message: 'id should be an integer',
+        value: 'test'
+    }
+}
+```
 
 # What's in a name?
 Dee is one of my favorite detective characters - [Judge Dee](https://en.wikipedia.org/wiki/Judge_Dee).
