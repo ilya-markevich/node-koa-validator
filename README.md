@@ -19,7 +19,7 @@
 # Usage
 
 The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for `ctx.request.body`, `ctx.params` and `ctx.request.query` objects.
-You can use each of the validators separately.
+You can use each validator separately.
 
 The example of code:
 ```javascript
@@ -56,7 +56,7 @@ app.use((ctx, next) => {
 })
 ```
 
-You can find more details about creation of custom validators and dee-validator usage [here](https://github.com/ilya-markevich/node-validator)
+You can find more details about creation of custom validators and dee-validator usage [here](https://github.com/ilya-markevich/node-validator).
 
 Example of errors format:
 ``` javascript
