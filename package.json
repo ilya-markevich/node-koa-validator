@@ -15,7 +15,7 @@
   ],
   "bugs": "https://github.com/ilya-markevich/node-koa-validator/issues",
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/makeMiddleware.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ilya-markevich/node-koa-validator"
@@ -23,14 +23,15 @@
   "homepage": "https://github.com/ilya-markevich/node-koa-validator#readme",
   "scripts": {
     "eslint": "eslint src/ tests/ index.js",
-    "test": "mocha --ui tdd --recursive tests",
+    "test": "tsc && mocha --ui tdd --recursive tests",
     "cover": "nyc npm test",
     "precommit": "npm run eslint",
     "prepush": "npm run cover",
     "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "dee-validator": "^1.0.0"
+    "@types/koa": "^2.0.39",
+    "dee-validator": "1.1.1"
   },
   "devDependencies": {
     "coveralls": "^2.12.0",
@@ -40,7 +41,8 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^10.1.2",
     "should": "^11.2.0",
-    "sinon": "^2.1.0"
+    "sinon": "^2.1.0",
+    "typescript": "^2.2.2"
   },
   "engines": {
     "node": ">=6.0.0"
