@@ -2,10 +2,8 @@ import * as koa from 'koa';
 import DeeValidator = require('dee-validator');
 
 declare module 'koa' {
-  namespace Application {
-    export interface Context {
-      validator: deeKoaValidatorMiddleware.DeeKoaValidator
-    }
+  interface BaseContext {
+    validator: deeKoaValidatorMiddleware.DeeKoaValidator
   }
 }
 
