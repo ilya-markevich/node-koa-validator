@@ -12,9 +12,15 @@
 [Dee-validator](https://github.com/ilya-markevich/node-validator) port for Koa framework.
 
 # Table of contents
+* [Migration to v2](#migration-to-v2)
 * [Usage](#usage)
 * [What's in a name?](#whats-in-a-name)
 * [Author](#author)
+
+# Migration to v2
+
+The [v1](https://github.com/ilya-markevich/node-koa-validator/tree/v1.1.1) doesn't support async validators meaning the API is synchronous.
+For migration to v2, await `getErrors` and `hasErrors` methods.
 
 # Usage
 
@@ -36,7 +42,7 @@ const customValidators = { // custom validators
 
 app.use(validator(customValidators));
 
-app.use((ctx, next) => {
+app.use(async (ctx, next) => {
     const validator = ctx.validator;
     const { bodyValidator, paramsValidator, queryValidator } = validator;
 
@@ -46,9 +52,9 @@ app.use((ctx, next) => {
 
     paramsValidator.property('id').isNotEmpty();
 
-    if (validator.hasErrors()) { // return true in case if no errors in body, params and query validators
+    if (await validator.hasErrors()) { // return true in case if no errors in body, params and query validators
       return Promise.reject({
-        errors: validator.getErrors() // here you can get errors from all of the validators
+        errors: await validator.getErrors() // here you can get errors from all of the validators
       });
     } else {
       return next();

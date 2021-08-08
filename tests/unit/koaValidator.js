@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-require('should');
-const sinon = require('sinon');
+require("should");
+const sinon = require("sinon");
 
-const KoaValidator = require('../../src/koaValidator');
-const testData = require('./data/koaValidator');
+const KoaValidator = require("../../src/koaValidator");
+const testData = require("./data/koaValidator");
 
-describe('Koa Validator', () => {
-  describe('Initial State', () => {
-    it('should check initial state', () => {
+describe("Koa Validator", () => {
+  describe("Initial State", () => {
+    it("should check initial state", () => {
       const { context } = testData;
       const validator = new KoaValidator(context);
 
@@ -18,7 +18,7 @@ describe('Koa Validator', () => {
       validator.context.should.be.eql(context);
     });
 
-    it('should check singleton getters', () => {
+    it("should check singleton getters", () => {
       const { context } = testData;
       const validator = new KoaValidator(context);
 
@@ -32,48 +32,67 @@ describe('Koa Validator', () => {
     });
   });
 
-  describe('Static Methods', () => {
-    describe('#extend', () => {
-      it('should call extend even if methods not passed', () => {
+  describe("Static Methods", () => {
+    describe("#extend", () => {
+      // eslint-disable-next-line max-nested-callbacks
+      it("should call extend even if methods not passed", () => {
         KoaValidator.extend(null);
       });
     });
   });
 
-  describe('#hasErrors', () => {
-    it('should return that validator has errors', () => {
+  describe("#hasErrors", () => {
+    it("should return that validator has errors", async () => {
       const { context } = testData;
       const validator = new KoaValidator(context);
 
-      validator.bodyValidator.hasErrors = sinon.stub().returns(false);
-      validator.paramsValidator.hasErrors = sinon.stub().returns(false);
-      validator.queryValidator.hasErrors = sinon.stub().returns(true);
+      validator.bodyValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.paramsValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.queryValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(true));
 
-      validator.hasErrors().should.be.eql(true);
+      (await validator.hasErrors()).should.be.eql(true);
     });
 
-    it('should return that validator has no errors', () => {
+    it("should return that validator has no errors", async () => {
       const { context } = testData;
       const validator = new KoaValidator(context);
 
-      validator.bodyValidator.hasErrors = sinon.stub().returns(false);
-      validator.paramsValidator.hasErrors = sinon.stub().returns(false);
-      validator.queryValidator.hasErrors = sinon.stub().returns(false);
+      validator.bodyValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.paramsValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.queryValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
 
-      validator.hasErrors().should.be.eql(false);
+      (await validator.hasErrors()).should.be.eql(false);
     });
   });
 
-  describe('#getErrors', () => {
-    it('should return errors', () => {
+  describe("#getErrors", () => {
+    it("should return errors", async () => {
       const { context, validatorError, koaValidatorErrors } = testData;
       const validator = new KoaValidator(context);
 
-      validator.bodyValidator.getErrors = sinon.stub().returns([validatorError]);
-      validator.paramsValidator.getErrors = sinon.stub().returns([]);
-      validator.queryValidator.getErrors = sinon.stub().returns([]);
+      validator.bodyValidator.getErrors = sinon
+        .stub()
+        .returns([validatorError]);
+      validator.paramsValidator.getErrors = sinon
+        .stub()
+        .returns(Promise.resolve([]));
+      validator.queryValidator.getErrors = sinon
+        .stub()
+        .returns(Promise.resolve([]));
 
-      validator.getErrors().should.be.eql(koaValidatorErrors);
+      (await validator.getErrors()).should.be.eql(koaValidatorErrors);
     });
   });
 });
