@@ -1,9 +1,9 @@
-import * as koa from 'koa';
-import DeeValidator = require('dee-validator');
+import * as koa from "koa";
+import DeeValidator = require("dee-validator");
 
-declare module 'koa' {
-  interface BaseContext {
-    validator: deeKoaValidatorMiddleware.DeeKoaValidator
+declare module "koa" {
+  interface DefaultContext {
+    validator: deeKoaValidatorMiddleware.DeeKoaValidator;
   }
 }
 
@@ -17,14 +17,14 @@ declare namespace deeKoaValidatorMiddleware {
 
     queryValidator: DeeValidator;
 
-    hasErrors(): boolean;
+    hasErrors(): Promise<boolean>;
 
-    getErrors(): DeeValidator.ValidationError[];
+    getErrors(): Promise<DeeValidator.ValidationError[]>;
   }
 }
 
-declare function deeKoaValidatorMiddleware(customValidators?: DeeValidator.ValidatorsObject): koa.Middleware;
+declare function deeKoaValidatorMiddleware(
+  customValidators?: DeeValidator.ValidatorsObject
+): koa.Middleware;
 
 export = deeKoaValidatorMiddleware;
-
-
