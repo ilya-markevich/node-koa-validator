@@ -1,4 +1,5 @@
 tests
+tsTests
 .nyc_output
 coverage
 .idea
