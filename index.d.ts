@@ -1,30 +1,26 @@
-import * as koa from "koa";
-import DeeValidator = require("dee-validator");
+import * as koa from 'koa';
+import DeeValidator, { type ValidationError, ValidatorsObject } from 'dee-validator';
 
-declare module "koa" {
+declare module 'koa' {
   interface DefaultContext {
-    validator: deeKoaValidatorMiddleware.DeeKoaValidator;
+    validator: DeeKoaValidator;
   }
 }
 
-declare namespace deeKoaValidatorMiddleware {
-  interface DeeKoaValidator {
-    context: koa.Context;
+export type DeeKoaValidator = {
+  context: koa.Context;
 
-    bodyValidator: DeeValidator;
+  bodyValidator: DeeValidator;
 
-    paramsValidator: DeeValidator;
+  paramsValidator: DeeValidator;
 
-    queryValidator: DeeValidator;
+  queryValidator: DeeValidator;
 
-    hasErrors(): Promise<boolean>;
+  hasErrors(): Promise<boolean>;
 
-    getErrors(): Promise<DeeValidator.ValidationError[]>;
-  }
-}
+  getErrors(): Promise<ValidationError[]>;
+};
 
-declare function deeKoaValidatorMiddleware(
-  customValidators?: DeeValidator.ValidatorsObject
-): koa.Middleware;
+declare function deeKoaValidatorMiddleware(customValidators?: ValidatorsObject): koa.Middleware;
 
-export = deeKoaValidatorMiddleware;
+export default deeKoaValidatorMiddleware;

@@ -1,5 +1,7 @@
-import Koa = require("koa");
-import validator = require("../index");
+/* eslint-disable no-console */
+
+import Koa from 'koa';
+import validator from '../index';
 
 const app = new Koa();
 
@@ -11,9 +13,9 @@ app.use(async (ctx) => {
 
   requestObj.accepts();
 
-  bodyValidator.property("prop1").optional().isArray();
-  paramsValidator.property("prop2").isNotEmpty().withMessage("test message");
-  queryValidator.property("prop3").optional().isBoolean();
+  bodyValidator.property('prop1').optional().isArray();
+  paramsValidator.property('prop2').isNotEmpty().withMessage('test message');
+  queryValidator.property('prop3').optional().isBoolean();
 
   const hasErrors = await ctx.validator.hasErrors();
 
@@ -21,7 +23,7 @@ app.use(async (ctx) => {
     const errors = await ctx.validator.getErrors();
 
     errors.forEach((error) => {
-      console.log(`${error.value}, ${error.errorMessage}, ${error.path}`);
+      console.log(`${error.value as string}, ${error.errorMessage}, ${error.path}`);
     });
   }
 });
