@@ -26,10 +26,13 @@ jobs:
                 run: npm install
 
             -   name: Run lint
-                run: npm run eslint
+                run: npm run lint
+
+            -   name: Run typescript tests
+                run: npm run test:typescript
 
             -   name: Run tests
-                run: npm run cover
+                run: npm run coverage
     version_check:
         name: Package.json version check
         needs: test
