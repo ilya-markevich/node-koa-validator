@@ -10,3 +10,7 @@ tsconfig.json
 npm-debug.log
 .github
 scripts
+babel.config.mjs
+eslint.config.mjs
+jest.config.mjs
+prettier.config.mjs
