@@ -6,15 +6,14 @@
 [Dee-validator](https://github.com/ilya-markevich/node-validator) port for Koa framework.
 
 # Table of contents
-* [Migration to v2](#migration-to-v2)
+* [Migration to v2/v3](#migration-to-v2-v3)
 * [Usage](#usage)
-* [What's in a name?](#whats-in-a-name)
 * [Author](#author)
 
-# Migration to v2
+# Migration to v2-v3
 
 The [v1](https://github.com/ilya-markevich/node-koa-validator/tree/v1.1.1) doesn't support async validators meaning the API is synchronous.
-For migration to v2, await `getErrors` and `hasErrors` methods.
+For migration to v2-v3, await `getErrors` and `hasErrors` methods.
 
 # Usage
 
