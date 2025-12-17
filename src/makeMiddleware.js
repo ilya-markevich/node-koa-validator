@@ -1,8 +1,6 @@
-"use strict";
+import KoaValidator from './koaValidator';
 
-const KoaValidator = require("./koaValidator");
-
-module.exports = (customMethods) => (ctx, next) => {
+export default (customMethods) => (ctx, next) => {
   ctx.validator = new KoaValidator(ctx);
   KoaValidator.extend(customMethods);
 
